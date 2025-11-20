@@ -1,5 +1,5 @@
-from database import Base, engine, SessionLocal
-from user import User
+from orm_sqlalchemy.db.database import Base, engine, SessionLocal
+from orm_sqlalchemy.models.user import User
 
 # Créer les tables
 def create_tables():
