@@ -1,20 +1,15 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-from user import User
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 DATABASE_URL = "sqlite:///utilisateurs.db"
+
 engine = create_engine(DATABASE_URL, echo=True)
-
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
 
-def  add_users():
-    db_session = SessionLocal()
+def get_session():
+    session = SessionLocal()
     try:
-        user1 = User(name="Alex", age=21)
-        user2 = User(name="Bruno", age=22)
-        db_session.add_all([user1, user2])
-        db_session.commit()
-        print("Utilisateurs Ajoutés !")
+        yield session
     finally:
-        db_session.close()
+        session.close()
