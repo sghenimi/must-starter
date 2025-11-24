@@ -11,7 +11,7 @@ TEST_COURSE_DATA = [
 
 # Les fonctions de test doivent être définies comme 'async def'
 # si vous utilisez une version récente de pytest-asyncio.
-
+@pytest.mark.asyncio
 async def test_create_table_and_fetch_empty(db_manager: AsyncCourseDBManager):
     """Test de la création de table et vérifie qu'elle est vide."""
     # Act
@@ -22,7 +22,7 @@ async def test_create_table_and_fetch_empty(db_manager: AsyncCourseDBManager):
     assert rows is not None
     assert len(rows) == 0, "La table devrait être vide après la création."
 
-
+@pytest.mark.asyncio
 async def test_insert_courses_success(db_manager: AsyncCourseDBManager):
     """Test de l'insertion et de la récupération des données."""
     # Arrange
@@ -40,7 +40,7 @@ async def test_insert_courses_success(db_manager: AsyncCourseDBManager):
     assert 'Test Async Course 1' in course_names
     assert 'Test Async Course 2' in course_names
 
-
+@pytest.mark.asyncio
 async def test_insert_duplicate_courses(db_manager: AsyncCourseDBManager):
     """Test la gestion des doublons (ON CONFLICT DO NOTHING)."""
     # Arrange

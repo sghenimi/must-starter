@@ -4,7 +4,7 @@ import asyncpg
 from app_fastapi_postgresql.main_async import DB_CONFIG, AsyncCourseDBManager
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 async def db_pool():
     """
     Fixture de session pour créer un pool de connexions à la BD.
